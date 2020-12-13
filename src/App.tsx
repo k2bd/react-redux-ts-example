@@ -20,15 +20,14 @@ const App: React.FC = () => {
         [dispatch]
     )
 
-    const displayArticles = (
-        articles.map(
-            (article: IArticle) => {
-                <Article
-                    key={article.id}
-                    article={article}
-                    removeArticle={removeArticle}
-                />
-            }
+    const displayArticles = articles.map(
+        (article: IArticle) => (
+            <Article
+                key={article.id}
+                article={article}
+                removeArticle={removeArticle}
+            />
+
         )
     )
 

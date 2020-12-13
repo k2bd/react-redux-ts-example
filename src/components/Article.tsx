@@ -24,7 +24,7 @@ export const Article: React.FC<Props> = ({ article, removeArticle }) => {
                 <p>{article.body}</p>
             </div>
             <button onClick={() => deleteArtcile(article)}>
-                🗑️
+                Delete
             </button>
         </div>
     )

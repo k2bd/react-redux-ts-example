@@ -63,6 +63,23 @@ const reducer = (
                 articles: mappedArticles,
             }
         case actionTypes.REMOVE_ARTICLE_REQUESTED:
+            const toRemoveArticles = state.articles.map(
+                (article) => {
+                    if (article.id === action.article.id) {
+                        return {
+                            ...article,
+                            removePending: true,
+                        }
+                    } else {
+                        return article
+                    }
+                }
+            )
+            return {
+                ...state,
+                articles: toRemoveArticles,
+            }
+        case actionTypes.REMOVE_ARTICLE_RECIEVED_OK:
             const newArticles = state.articles.filter(
                 article => article.id !== action.article.id
             )

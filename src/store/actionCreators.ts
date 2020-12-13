@@ -8,20 +8,12 @@ export function addArticle(article: IArticle) {
         article,
     }
 
-    const recieve_ok_action: ArticleAction = {
+    const response_ok_action: ArticleAction = {
         type: actionTypes.ADD_ARTICLE_RECIEVED_OK,
         article,
     }
 
-    return (dispatch: DispatchType) => {
-        dispatch(request_action)
-
-        // Simulate HTTP request delay
-        setTimeout(
-            () => {dispatch(recieve_ok_action)},
-            1000
-        )
-    }
+    return simulateHttpRequest(request_action, response_ok_action)
 }
 
 
@@ -31,17 +23,26 @@ export function removeArticle(article: IArticle) {
         article,
     }
 
-    return simulateHttpRequest(request_action)
+    const response_ok_action: ArticleAction = {
+        type: actionTypes.REMOVE_ARTICLE_RECIEVED_OK,
+        article,
+    }
+
+    return simulateHttpRequest(request_action, response_ok_action)
 }
 
 
-export function simulateHttpRequest(action: ArticleAction) {
+export function simulateHttpRequest(
+    request_action: ArticleAction,
+    response_ok_action: ArticleAction,
+) {
     return (dispatch: DispatchType) => {
+        dispatch(request_action)
+
+        // Simulate HTTP request delay
         setTimeout(
-            () => {
-                dispatch(action)
-            },
-            500
+            () => {dispatch(response_ok_action)},
+            1000
         )
     }
 }

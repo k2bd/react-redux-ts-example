@@ -1,23 +1,37 @@
+import { request } from "http"
 import * as actionTypes from "./actionTypes"
 
 
 export function addArticle(article: IArticle) {
-    const action: ArticleAction = {
-        type: actionTypes.ADD_ARTICLE,
+    const request_action: ArticleAction = {
+        type: actionTypes.ADD_ARTICLE_REQUESTED,
         article,
     }
 
-    return simulateHttpRequest(action)
+    const recieve_ok_action: ArticleAction = {
+        type: actionTypes.ADD_ARTICLE_RECIEVED_OK,
+        article,
+    }
+
+    return (dispatch: DispatchType) => {
+        dispatch(request_action)
+
+        // Simulate HTTP request delay
+        setTimeout(
+            () => {dispatch(recieve_ok_action)},
+            1000
+        )
+    }
 }
 
 
 export function removeArticle(article: IArticle) {
-    const action: ArticleAction = {
-        type: actionTypes.REMOVE_ARTICLE,
+    const request_action: ArticleAction = {
+        type: actionTypes.REMOVE_ARTICLE_REQUESTED,
         article,
     }
 
-    return simulateHttpRequest(action)
+    return simulateHttpRequest(request_action)
 }
 
 

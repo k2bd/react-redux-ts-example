@@ -17,14 +17,19 @@ export const Article: React.FC<Props> = ({ article, removeArticle }) => {
         [dispatch, removeArticle]
     )
 
+    const deleteText = (article.addPending || article.removePending) ? "⌛" : "🗑️"
+
     return (
         <div className="Article">
             <div>
                 <h1>{article.title}</h1>
                 <p>{article.body}</p>
             </div>
-            <button onClick={() => deleteArtcile(article)}>
-                Delete
+            <button
+                onClick={() => deleteArtcile(article)}
+                disabled={article.addPending || article.removePending}
+            >
+                {deleteText}
             </button>
         </div>
     )

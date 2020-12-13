@@ -2,6 +2,8 @@ interface IArticle {
     id: number
     title: string
     body: string
+    addPending: boolean
+    removePending: boolean
 }
 
 
